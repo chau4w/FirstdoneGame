@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1646572957 source:c:\users\administrator\desktop\choutapcode\projectgameltnc\main.cpp
+	<iostream>
+	"function.h"
+
+1646573728 source:c:\users\administrator\desktop\choutapcode\projectgameltnc\function.cpp
+	"function.h"
+	<ctime>
+
+1646573728 c:\users\administrator\desktop\choutapcode\projectgameltnc\function.h
+	"const.h"
+	<iostream>
+	<string>
+	<Windows.h>
+
+1646411290 c:\users\administrator\desktop\choutapcode\projectgameltnc\const.h
+	<iostream>
+
+1646411322 source:c:\users\administrator\desktop\choutapcode\projectgameltnc\const.cpp
+
