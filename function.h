@@ -4,16 +4,21 @@
 #include "const.h"
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include <Windows.h>
+#include <cctype>
+#include <fstream>
+#include <vector>
 
 using namespace std;
 
-string selectWord();
-char getALetter();
+void rfile(const string DATA_FILE, vector <string>& wordList);
+string selectWord(vector <string>);
+char getALetter(string&);
 bool logicGame(char, string);
-string updateWord(char, string, string, bool);
-int updateChoice(int, bool);
-void renderGame(string, bool, int );
+void updateWord(char, const string&, string&, bool);
+void updateChoice(int&, bool);
+void renderGame(string, int, string );
 bool gameOver(string, string);
 void displayResult(int, string);
 void startGame();

@@ -1,19 +1,36 @@
 #include "function.h"
 #include<ctime>
-
-string selectWord()
+void rfile()
+void rfile(const string DATA_FILE, vector <string>& wordList)
 {
-    int numberOfWord = sizeof(WORD_LIST) / sizeof(string);
-    srand(time(NULL));
-    int whatWord = rand() % numberOfWord;
-    string cc = WORD_LIST[whatWord];
-    return cc;
+    ifstream file(DATA_FILE);
+    if( file.is_open() )
+    {
+        string word;
+        while(file >> word)
+        {
+            wordList.push_back(word);
+        }
+        file.close();
+    }
 }
-char getALetter()
+string selectWord(vector <string> wordList)
+{
+    if(wordList.size() > 0)
+    {
+        srand(time(NULL));
+        return wordList[rand() % wordList.size()];
+    }
+    else return "";
+}
+char getALetter(string& selectedLetter)
 {
     cout << "Please enter the letter: ";
     char letter;
     cin >> letter;
+    letter = tolower(letter);
+    selectedLetter.push_back(letter);
+    selectedLetter.push_back(' ');
     return letter;
 }
 bool logicGame( char letter, string secretWord)
@@ -21,24 +38,22 @@ bool logicGame( char letter, string secretWord)
     if( (int)secretWord.find(letter) == -1) return 0;
     else return 1;
 }
-string updateWord(char letter, string secretWord, string guessedWord, bool check)
+void updateWord(char letter, const string& secretWord, string& guessedWord, bool check)
 {
     if(check == true){
         for(int i = 0; i < secretWord.length(); i++){
             if(secretWord[i] == letter) guessedWord[i] = letter;
         }
     }
-    return guessedWord;
 }
-int updateChoice(int wrongChoice, bool check)
+void updateChoice(int& wrongChoice, bool check)
 {
     if(check == false) {wrongChoice = wrongChoice + 1 ;}
-    return wrongChoice;
 }
-void renderGame( string guessedWord, bool check, int wrongChoice )
+void renderGame( string guessedWord, int wrongChoice, string selectedLetter)
 {
     cout << FIGURE[wrongChoice];
-    cout << "Your total wrong answers: " << wrongChoice <<endl;
+    cout << "Your total wrong answers: " << wrongChoice << endl << selectedLetter <<endl;
     cout << guessedWord << endl;
 
 }

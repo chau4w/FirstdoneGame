@@ -4,21 +4,30 @@ using namespace std;
 
 int main()
 {
+
+    vector <string> wordList;
+    rfile(DATA_FILE, wordList );
     do{
-        string secretWord = selectWord();
+        string secretWord = selectWord(wordList);
+        if(secretWord.length() < 1)
+        {
+            cout << "Error reading vocabulary file " << DATA_FILE;
+            return -1;
+        }
         string guessedWord = string(secretWord.length(), '-');
         int wrongChoice = 0;
         bool check = true;
         startGame();
+        string selectedLetter;
         do{
-            renderGame(guessedWord, check, wrongChoice);
-            char letter = getALetter();
+            renderGame(guessedWord, wrongChoice, selectedLetter);
+            char letter = getALetter(selectedLetter);
             check = logicGame(letter, secretWord);
-            guessedWord = updateWord(letter, secretWord, guessedWord, check);
-            wrongChoice = updateChoice(wrongChoice, check);
+            updateWord(letter, secretWord, guessedWord, check);
+            updateChoice(wrongChoice, check);
             system("cls");
         }while( wrongChoice < Max_wrong_choices && !gameOver(secretWord, guessedWord));
-        renderGame(guessedWord, check, wrongChoice);
+        renderGame(guessedWord, wrongChoice, selectedLetter);
         displayResult(wrongChoice, secretWord);
         Sleep(2000);
         system("cls");
