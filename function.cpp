@@ -1,5 +1,5 @@
 #include "function.h"
-#include<ctime>
+
 void rfile()
 void rfile(const string DATA_FILE, vector <string>& wordList)
 {
